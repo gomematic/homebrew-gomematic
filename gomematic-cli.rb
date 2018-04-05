@@ -1,25 +1,26 @@
 require "formula"
 require "language/go"
+require "open-uri"
 
 class GomematicCli < Formula
   desc "Lightweight and powerful Homematic - CLI"
   homepage "https://github.com/gomematic/gomematic-cli"
 
+  head do
+    url "https://github.com/gomematic/gomematic-cli.git", :branch => "master"
+    depends_on "go" => :build
+  end
+
   stable do
     url "https://dl.webhippie.de/gomematic/cli/0.1.0/gomematic-cli-0.1.0-darwin-10.6-amd64"
-    sha256 `curl -Ls https://dl.webhippie.de/gomematic/cli/0.1.0/gomematic-cli-0.1.0-darwin-10.6-amd64.sha256`.split(" ").first
+    sha256 open("https://dl.webhippie.de/gomematic/cli/0.1.0/gomematic-cli-0.1.0-darwin-10.6-amd64.sha256").read.split(" ").first
     version "0.1.0"
   end
 
   devel do
     url "https://dl.webhippie.de/gomematic/cli/master/gomematic-cli-master-darwin-10.6-amd64"
-    sha256 `curl -Ls https://dl.webhippie.de/gomematic/cli/master/gomematic-cli-master-darwin-10.6-amd64.sha256`.split(" ").first
+    sha256 open("https://dl.webhippie.de/gomematic/cli/master/gomematic-cli-master-darwin-10.6-amd64.sha256").read.split(" ").first
     version "master"
-  end
-
-  head do
-    url "https://github.com/gomematic/gomematic-cli.git", :branch => "master"
-    depends_on "go" => :build
   end
 
   test do
