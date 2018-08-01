@@ -7,7 +7,7 @@
 
 **This project is under heavy development, it's not in a working state yet!**
 
-Homebrew repository to install Gomematic on macOS.
+Homebrew repository to install [Gomematic](https://gomematic.tech) on macOS.
 
 
 ## Prepare
