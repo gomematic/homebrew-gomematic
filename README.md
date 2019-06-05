@@ -30,7 +30,9 @@ gomematic-cli -h
 ## Development
 
 ```
-rake test
+bundle install
+bundle exec rake rubocop
+bundle exec rake spec
 ```
 
 

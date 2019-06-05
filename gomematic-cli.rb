@@ -12,9 +12,9 @@ class GomematicCli < Formula
   end
 
   stable do
-    url "https://dl.webhippie.de/gomematic/cli/0.1.0/gomematic-cli-0.1.0-darwin-10.6-amd64"
+    url "https://dl.gomematic.tech/cli/0.1.0/gomematic-cli-0.1.0-darwin-amd64"
     sha256 begin
-      open("https://dl.webhippie.de/gomematic/cli/0.1.0/gomematic-cli-0.1.0-darwin-10.6-amd64.sha256").read.split(" ").first
+      open("https://dl.gomematic.tech/cli/0.1.0/gomematic-cli-0.1.0-darwin-amd64.sha256").read.split(" ").first
     rescue
       nil
     end
@@ -22,9 +22,9 @@ class GomematicCli < Formula
   end
 
   devel do
-    url "https://dl.webhippie.de/gomematic/cli/master/gomematic-cli-master-darwin-10.6-amd64"
+    url "https://dl.gomematic.tech/cli/testing/gomematic-cli-testing-darwin-amd64"
     sha256 begin
-      open("https://dl.webhippie.de/gomematic/cli/master/gomematic-cli-master-darwin-10.6-amd64.sha256").read.split(" ").first
+      open("https://dl.gomematic.tech/cli/testing/gomematic-cli-testing-darwin-amd64.sha256").read.split(" ").first
     rescue
       nil
     end
@@ -43,24 +43,24 @@ class GomematicCli < Formula
       ENV["CGO_ENABLED"] = 0
       ENV["TAGS"] = ""
 
-      ENV.prepend_create_path "PATH", buildpath/"bin"
+      ENV.prepend_create_path "PATH", buildpath / "bin"
 
-      currentpath = buildpath/"src/github.com/gomematic/gomematic-cli"
+      currentpath = buildpath / "gomematic-cli"
       currentpath.install Dir["*"]
-      Language::Go.stage_deps resources, buildpath/"src"
+      Language::Go.stage_deps resources, buildpath / "src"
 
       cd currentpath do
         system "make", "test", "build"
 
-        bin.install "gomematic-cli"
+        bin.install "bin/gomematic-cli"
         # bash_completion.install "contrib/bash-completion/_gomematic-cli"
         # zsh_completion.install "contrib/zsh-completion/_gomematic-cli"
         prefix.install_metafiles
       end
     when build.devel?
-      bin.install "#{buildpath}/gomematic-cli-master-darwin-10.6-amd64" => "gomematic-cli"
+      bin.install "#{buildpath}/gomematic-cli-testing-darwin-amd64" => "gomematic-cli"
     else
-      bin.install "#{buildpath}/gomematic-cli-0.1.0-darwin-10.6-amd64" => "gomematic-cli"
+      bin.install "#{buildpath}/gomematic-cli-0.1.0-darwin-amd64" => "gomematic-cli"
     end
   end
 end
